@@ -22,7 +22,7 @@ if (NOT OPENGL_FOUND)
     message (ERROR " OPENGL not found!")
 endif (NOT OPENGL_FOUND)
 
-add_executable (BSplines main.cpp)
+add_executable (BSplines Application.cpp main.cpp)
 
 ########################################################
 # Linking & stuff
