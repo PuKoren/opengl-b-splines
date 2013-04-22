@@ -1,43 +1,37 @@
 #include <GL/freeglut.h>
+#include "Application.h"
 
 void keyboard(unsigned char key, int x, int y);
+void mouse(int button, int state, int x, int y);
 void display(void);
+void update();
 
+Application a;
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    int windowID = glutCreateWindow("BSplines - OpenGL");
+    glutCreateWindow("BSplines - OpenGL");
     glutKeyboardFunc(&keyboard);
+    glutMouseFunc(&mouse);
+    glutIdleFunc(&update);
     glutDisplayFunc(&display);
     glutMainLoop();
-    glutDestroyWindow(windowID);
     glutExit();
     return EXIT_SUCCESS;
 }
 
-
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-        case '\x1B':
-            exit(EXIT_SUCCESS);
-            break;
-    }
+void keyboard(unsigned char key, int x, int y){
+    a.keyboard(key, x, y);
 }
 
+void mouse(int button, int state, int x, int y){
+    a.mouse(button, state, x, y);
+}
 
-void display()
-{
-    glClear(GL_COLOR_BUFFER_BIT);
+void update(){
+    a.update();
+}
 
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_POLYGON);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f( 0.5f, -0.5f);
-        glVertex2f( 0.5f,  0.5f);
-        glVertex2f(-0.5f,  0.5f);
-    glEnd();
-
-    glFlush();
+void display(){
+    a.draw();
 }
