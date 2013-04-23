@@ -1,1 +1,0 @@
-/usr/bin/c++   -g    CMakeFiles/BSplines.dir/maths/Vector2.cpp.o CMakeFiles/BSplines.dir/Application.cpp.o CMakeFiles/BSplines.dir/main.cpp.o  -o BSplines -rdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi 

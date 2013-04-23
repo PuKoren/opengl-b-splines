@@ -1,1 +1,0 @@
-/home/koren/Dev/c++/OpenGL/opengl-b-splines/bin/CMakeFiles/BSplines.dir
