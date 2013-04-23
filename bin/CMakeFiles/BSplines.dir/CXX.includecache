@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/Application.cpp
+Application.h
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/Application.h
+
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/Application.h
+vector
+-
+GL/freeglut.h
+-
+maths/Vector2.h
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/maths/Vector2.h
+config.h
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/config.h
+
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/config.h
+
+/home/koren/Dev/c++/OpenGL/opengl-b-splines/maths/Vector2.h
+
