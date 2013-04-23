@@ -9,16 +9,17 @@ Application::~Application(){
 }
 
 void Application::keyboard(unsigned char key, int x, int y){
-	switch (key)
-    {
+	switch (key){
 		case '\x1B':
-			exit(EXIT_SUCCESS);
+			glutLeaveMainLoop();
 			break;
     }
 }
 
 void Application::mouse(int button, int state, int x, int y){
-
+    if(state == GLUT_DOWN && button == GLUT_LEFT_BUTTON){
+        this->vectors.push_back(Vector2(x, window_height - y - 5));
+    }
 }
 
 void Application::run(){
@@ -31,13 +32,23 @@ void Application::update(){
 
 void Application::draw(){
 	glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0f, 1.0f, 1.0f);
+        //draw vectors
+        for(unsigned int i = 0; i < this->vectors.size(); i++){
+            glBegin(GL_QUADS);
+            glVertex2f(this->vectors[i].X, this->vectors[i].Y - 10);
+            glVertex2f(this->vectors[i].X + 10, this->vectors[i].Y - 10);
+            glVertex2f(this->vectors[i].X + 10, this->vectors[i].Y);
+            glVertex2f(this->vectors[i].X, this->vectors[i].Y);
+            glEnd();
+        }
 
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_POLYGON);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(-0.5f, 0.0f);
-        glVertex2f(-0.0f, 0.5f);
-    glEnd();
-
+        //draw lines between vectors
+        for(unsigned int i = 0; i < this->vectors.size()-1; i++){
+            glBegin(GL_LINES);
+            glVertex2f(this->vectors[i].X + 5, this->vectors[i].Y - 5);
+            glVertex2f(this->vectors[i+1].X + 5, this->vectors[i+1].Y - 5);
+            glEnd();
+        }
     glFlush();
 }

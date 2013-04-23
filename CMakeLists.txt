@@ -22,7 +22,7 @@ if (NOT OPENGL_FOUND)
     message (ERROR " OPENGL not found!")
 endif (NOT OPENGL_FOUND)
 
-add_executable (BSplines main.cpp)
+add_executable (BSplines maths/Vector2.cpp Application.cpp main.cpp)
 
 ########################################################
 # Linking & stuff
