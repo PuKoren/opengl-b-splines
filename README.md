@@ -6,30 +6,25 @@ Learning B-Splines with OpenGL
 
 Dependencies:
 ================
-
-Debian users:
--------------
+####Debian users:
 apt-get install freeglut3-dev libxmu-dev libxi-dev
 
-Windows users:
---------------
+####Windows users:
 MinGW with MSYS and g++ compiler
 Cmake installed on Cygwin
 
-This program needs OpenGL libs to run.
+######This program needs OpenGL libs to run.
 
 
 Building
 ========
-Unix:
------
+####Unix:
 mkdir build
 cd build
 cmake ../.
 make
 
-On Windows in Cygwin shell:
----------------------
+####Windows with Cygwin shell:
 mkdir build
 cd build
 cmake -G "MSYS Makefiles" ../.
