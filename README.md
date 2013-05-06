@@ -1,7 +1,10 @@
 opengl-b-splines
 ================
 
-Learning B-Splines with OpenGL
+Learning B-Splines with OpenGL.
+
+The Spline class use a lot of Paul Bourke C code to draw splines. Thanks to him.
+http://paulbourke.net/libraries/paulslib.h
 
 
 Dependencies:
