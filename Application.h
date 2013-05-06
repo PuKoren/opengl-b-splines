@@ -3,6 +3,7 @@
 #include <vector>
 #include <GL/freeglut.h>
 #include "maths/Vector2.h"
+#include "maths/Spline.h"
 #include "config.h"
 
 using namespace std;
@@ -10,6 +11,7 @@ using namespace std;
 class Application{
 private:
 	std::vector<Vector2> vectors;
+	Spline spline;
 public:
 	Application();
 	~Application();

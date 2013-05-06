@@ -19,7 +19,6 @@ int main(int argc, char** argv){
     
     glutKeyboardFunc(&keyboard);
     glutMouseFunc(&mouse);
-    glutIdleFunc(&update);
     glutDisplayFunc(&display);
     glutMainLoop();
     glutExit();

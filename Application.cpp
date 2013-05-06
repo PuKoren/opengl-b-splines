@@ -18,7 +18,21 @@ void Application::keyboard(unsigned char key, int x, int y){
 
 void Application::mouse(int button, int state, int x, int y){
     if(state == GLUT_DOWN && button == GLUT_LEFT_BUTTON){
-        this->vectors.push_back(Vector2(x, window_height - y));
+        Vector2 clickedVector = Vector2(x, window_height - y);
+
+        int selected = -1;
+        for(unsigned int i = 0; i < this->vectors.size(); i++){
+            if(clickedVector.Distance(&this->vectors[i]) < 10.0f){
+                selected = i;
+            }
+        }
+
+        if(selected < 0){
+            this->vectors.push_back(clickedVector);
+            if(this->vectors.size() > 1){
+                this->spline.update(3, this->vectors.size(), &this->vectors[0]);
+            }
+        }
     }
 }
 
@@ -27,7 +41,7 @@ void Application::run(){
 }
 
 void Application::update(){
-    glutPostRedisplay();
+    
 }
 
 void Application::draw(){
@@ -43,14 +57,7 @@ void Application::draw(){
             glEnd();
         }
 
-        //draw lines between vectors
-        if(this->vectors.size() > 0){
-            for(unsigned int i = 0; i < this->vectors.size()-1; i++){
-                glBegin(GL_LINES);
-                glVertex2f(this->vectors[i].X, this->vectors[i].Y);
-                glVertex2f(this->vectors[i+1].X, this->vectors[i+1].Y);
-                glEnd();
-            }
-        }
+        this->spline.draw();
+
     glFlush();
 }
