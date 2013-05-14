@@ -21,6 +21,7 @@ int main(int argc, char** argv){
     gluOrtho2D(0, window_width, 0, window_height); 
     
     glutKeyboardFunc(&keyboard);
+    glutSpecialFunc(&keyboardSpecialKeys);
     glutMouseFunc(&mouse);
     glutMotionFunc(&mouseMotion);
     glutDisplayFunc(&display);
@@ -58,9 +59,10 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT);
     a.draw();
     displayText(0, 0, 130, 0, 0, "Welcome to the B-Spline drawer !");
-    displayText(0, 10, 130, 0, 0, "Use your mouse to place control points and move them");
-    displayText(0, 20, 130, 0, 0, "Use + and - keys to change Spline Degree");
-    displayText(0, 30, 130, 0, 0, "Use arrows to move every control points");
+    displayText(0, 10, 130, 0, 0, "Use left mouse button to place control points and move them");
+    displayText(0, 20, 130, 0, 0, "Use right mouse button to delete a control point");
+    displayText(0, 30, 130, 0, 0, "Use + and - keys to change Spline Degree");
+    displayText(0, 40, 130, 0, 0, "Use arrows to move every control points");
 
     char notice[50];
     sprintf(notice, "Current degree: %d", a.getDegree());

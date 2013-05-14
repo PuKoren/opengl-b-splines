@@ -78,7 +78,17 @@ void Application::mouse(int button, int state, int x, int y){
                 this->update();
             }
         }
+    }else if(this->selected < 0 && state == GLUT_DOWN && button == GLUT_RIGHT_BUTTON){
+        Vector2 clickedVector = Vector2(x, window_height - y);
+        for(unsigned int i = 0; i < this->vectors.size(); i++){
+            if(clickedVector.Distance(&this->vectors[i]) < 10.0f){
+                this->vectors.erase(this->vectors.begin()+i);
+                this->update();
+                break;
+            }
+        }
     }
+
     if(state == GLUT_UP){
         selected = -1;
     }
