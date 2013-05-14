@@ -17,11 +17,13 @@ private:
 public:
 	Application();
 	~Application();
-	void keyboard(unsigned char key, int x, int y);
+	void keyboard(unsigned char key);
+	void keyboardSpecial(int key);
 	void mouse(int button, int state, int x, int y);
 	void mouseMotion(int x, int y);
 	void draw();
 	void update();
+	int getDegree();
 };
 
 #endif

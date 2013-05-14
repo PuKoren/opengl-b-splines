@@ -4,14 +4,17 @@
 Vector2::Vector2(Vector2 *v){
 	this->X = v->X;
 	this->Y = v->Y;
+	this->Z = v->Z;
 }
 Vector2::Vector2(){
 	this->X = 0;
 	this->Y = 0;
+	this->Z = 0;
 }
 Vector2::Vector2(const Vector2 &v){
 	this->X = v.X;
 	this->Y = v.Y;
+	this->Z = v.Z;
 }
 Vector2::~Vector2(){
 
@@ -19,12 +22,27 @@ Vector2::~Vector2(){
 Vector2::Vector2(int x, int y){
 	this->X = (float)x;
 	this->Y = (float)y;
+	this->Z = 0.f;
+}
+
+Vector2::Vector2(int x, int y, int z){
+	this->X = (float)x;
+	this->Y = (float)y;
+	this->Z = (float)z;
 }
 
 Vector2::Vector2(float x, float y){
 	this->X = x;
 	this->Y = y;
+	this->Z = 0.f;
 }
+
+Vector2::Vector2(float x, float y, float z){
+	this->X = x;
+	this->Y = y;
+	this->Z = z;
+}
+
 
 /*
 * Compute the Euclidian distance between two Vector2->

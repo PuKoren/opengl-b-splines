@@ -9,7 +9,7 @@ Application::~Application(){
 
 }
 
-void Application::keyboard(unsigned char key, int x, int y){
+void Application::keyboard(unsigned char key){
 	switch (key){
 		case '\x1B':
 			glutLeaveMainLoop();
@@ -26,7 +26,36 @@ void Application::keyboard(unsigned char key, int x, int y){
                 this->update();
             }
             break;
+        case '\x72':
+            this->vectors[0].Z -= 1.f;
+            this->update();
+            break;
     }
+}
+void Application::keyboardSpecial(int key){
+    switch (key){
+        case GLUT_KEY_RIGHT:
+            for(unsigned int i = 0; i < this->vectors.size(); i++){
+                this->vectors[i].X += 5;
+            }
+            break;
+        case GLUT_KEY_LEFT:
+            for(unsigned int i = 0; i < this->vectors.size(); i++){
+                this->vectors[i].X -= 5;
+            }
+            break;
+        case GLUT_KEY_UP:
+            for(unsigned int i = 0; i < this->vectors.size(); i++){
+                this->vectors[i].Y += 5;
+            }
+            break;
+        case GLUT_KEY_DOWN:
+            for(unsigned int i = 0; i < this->vectors.size(); i++){
+                this->vectors[i].Y -= 5;
+            }
+            break;
+    }
+    this->update();
 }
 
 void Application::update(){
@@ -64,7 +93,6 @@ void Application::mouseMotion(int x, int y){
 }
 
 void Application::draw(){
-	glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0.0f, 0.5f, 0.5f);
     //draw vectors
     for(unsigned int i = 0; i < this->vectors.size(); i++){
@@ -77,15 +105,20 @@ void Application::draw(){
     }
 
     //draw lines between vectors
-    for(unsigned int i = 0; i < this->vectors.size() -1; i++){
-        glBegin(GL_LINES);
-        glVertex2f(this->vectors[i].X, this->vectors[i].Y);
-        glVertex2f(this->vectors[i+1].X, this->vectors[i+1].Y);
-        glEnd();
+    if(this->vectors.size() > 0){
+        for(unsigned int i = 0; i < this->vectors.size() -1; i++){
+            glBegin(GL_LINES);
+            glVertex2f(this->vectors[i].X, this->vectors[i].Y);
+            glVertex2f(this->vectors[i+1].X, this->vectors[i+1].Y);
+            glEnd();
+        }
     }
 
     glColor3f(0.5f, 0.0f, 0.5f);
     //draw spline
     this->spline.draw();
-    glFlush();
+}
+
+int Application::getDegree(){
+    return this->degree;
 }

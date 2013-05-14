@@ -44,6 +44,7 @@ void Spline::computePoint(int *u,int n,int t,double v,Vector2 *control,Vector2 *
     b = blendPoint(k,t,u,v);
     output->X += control[k].X * b;
     output->Y += control[k].Y * b;
+    output->Z += control[k].Z * b;
   }
 }
 
