@@ -4,8 +4,8 @@
 
 void keyboard(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
+void mouseMotion(int x, int y);
 void display();
-void update();
 
 Application a;
 int main(int argc, char** argv){
@@ -19,6 +19,7 @@ int main(int argc, char** argv){
     
     glutKeyboardFunc(&keyboard);
     glutMouseFunc(&mouse);
+    glutMotionFunc(&mouseMotion);
     glutDisplayFunc(&display);
     glutMainLoop();
     glutExit();
@@ -33,8 +34,8 @@ void mouse(int button, int state, int x, int y){
     a.mouse(button, state, x, y);
 }
 
-void update(){
-    a.update();
+void mouseMotion(int x, int y){
+    a.mouseMotion(x, y);
 }
 
 void display(){
