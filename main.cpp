@@ -74,10 +74,11 @@ void display(){
     displayText(0, 48, 200, 200, 200, "Arrows: to move every control points");
     displayText(0, 60, 200, 200, 200, "R: rotate or stop rotate around your current mouse position");
     displayText(0, 72, 200, 200, 200, "Space: show/hide lines between control points");
+    displayText(0, 84, 200, 200, 200, "Suppr: reset the viewport");
 
     char notice[50];
     sprintf(notice, "Current degree: %d", a.getDegree());
-    displayText(0, window_height/2, 199, 244, 100, notice);
+    displayText(0, window_height/2, 100, 100, 100, notice);
     
     glutSwapBuffers();
 }

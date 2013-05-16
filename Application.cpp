@@ -38,6 +38,11 @@ void Application::keyboard(unsigned char key){
             this->drawLines = !this->drawLines;
             glutPostRedisplay();
             break;
+        case 127:
+            this->vectors.clear();
+            this->rotate = false;
+            this->update();
+            break;
     }
 }
 void Application::keyboardSpecial(int key){
