@@ -8,6 +8,7 @@ void keyboard(unsigned char key, int x, int y);
 void keyboardSpecialKeys(int key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
+void mousePassiveMotion(int x, int y);
 void display();
 void resize(int width, int height);
 
@@ -25,6 +26,7 @@ int main(int argc, char** argv){
     glutSpecialFunc(&keyboardSpecialKeys);
     glutMouseFunc(&mouse);
     glutMotionFunc(&mouseMotion);
+    glutPassiveMotionFunc(&mousePassiveMotion);
     glutDisplayFunc(&display);
     glutReshapeFunc(&resize);
     glutMainLoop();
@@ -48,6 +50,10 @@ void mouseMotion(int x, int y){
     a.mouseMotion(x, y);
 }
 
+void mousePassiveMotion(int x, int y){
+    a.mouseMotion(x, y);
+}
+
 void displayText(float x, float y, int r, int g, int b, const char *string) {
     int j = strlen( string );
     glColor3ub(r, g, b);
@@ -65,6 +71,7 @@ void display(){
     displayText(0, 20, 78, 205, 196, "Use right mouse button to delete a control point");
     displayText(0, 30, 78, 205, 196, "Use + and - keys to change Spline Degree");
     displayText(0, 40, 78, 205, 196, "Use arrows to move every control points");
+    displayText(0, 50, 78, 205, 196, "Use R key to rotate around your current mouse position (R to start, R to stop)");
 
     char notice[50];
     sprintf(notice, "Current degree: %d", a.getDegree());

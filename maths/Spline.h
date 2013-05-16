@@ -8,14 +8,14 @@
 class Spline{
 private:
 	Vector2* splinePoints;
-	void computeKnots(int *u,int n,int t);
-	void computeCurve(Vector2 *inp,int nn,int *knots,int t);
-	void computePoint(int *u,int n,int t,double v,Vector2 *control,Vector2 *output);
-	double blendPoint(int k,int t,int *u,double v);
+	void computeKnots(int*,int,int);
+	void computeCurve(Vector2*,int,int*,int);
+	Vector2 computePoint(int*,int,int,double,Vector2*);
+	double blendPoint(int,int,int*,double);
 public:
 	Spline();
 	~Spline();
-	void update(int degree, int n, Vector2*);
+	void update(int,int,Vector2*);
 	void draw();
 };
 

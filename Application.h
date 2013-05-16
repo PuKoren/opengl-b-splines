@@ -16,6 +16,7 @@ private:
 	int degree;
 	bool rotate;
 	Vector2 latestMousePosition;
+	Vector2 rotationAxis;
 public:
 	Application();
 	~Application();

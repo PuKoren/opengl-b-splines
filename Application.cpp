@@ -29,7 +29,8 @@ void Application::keyboard(unsigned char key){
             }
             break;
         case '\x72':
-            this->rotate = true;
+            this->rotate = !this->rotate;
+            this->rotationAxis = this->latestMousePosition;
             this->update();
             break;
     }
@@ -61,36 +62,28 @@ void Application::keyboardSpecial(int key){
 }
 
 void Application::update(){
-    if(this->rotate){
-        for(unsigned int i = 0; i < this->vectors.size(); i++){
-            this->vectors[i].RotateAround(this->latestMousePosition, 2.5f);
-        }
-        this->rotate = false;
-    }
     this->spline.update(this->degree, this->vectors.size(), &this->vectors[0]);
     glutPostRedisplay();
 }
 
 void Application::mouse(int button, int state, int x, int y){
     if(this->selected < 0 && state == GLUT_DOWN && button == GLUT_LEFT_BUTTON){
-        Vector2 clickedVector = Vector2(x, window_height - y);
         for(unsigned int i = 0; i < this->vectors.size(); i++){
-            if(clickedVector.Distance(&this->vectors[i]) < 10.0f){
+            if(this->latestMousePosition.Distance(&this->vectors[i]) < 10.0f){
                 this->selected = i;
                 glutPostRedisplay();
             }
         }
 
         if(selected < 0){
-            this->vectors.push_back(clickedVector);
+            this->vectors.push_back(this->latestMousePosition);
             if(this->vectors.size() > 1){
                 this->update();
             }
         }
     }else if(this->selected < 0 && state == GLUT_DOWN && button == GLUT_RIGHT_BUTTON){
-        Vector2 clickedVector = Vector2(x, window_height - y);
         for(unsigned int i = 0; i < this->vectors.size(); i++){
-            if(clickedVector.Distance(&this->vectors[i]) < 10.0f){
+            if(this->latestMousePosition.Distance(&this->vectors[i]) < 10.0f){
                 this->vectors.erase(this->vectors.begin()+i);
                 this->update();
                 break;
@@ -110,9 +103,17 @@ void Application::mouseMotion(int x, int y){
         this->vectors[this->selected] = clickedVector;
         this->update();
     }
+    this->latestMousePosition.X = x;
+    this->latestMousePosition.Y = window_height - y;
 }
 
 void Application::draw(){
+    if(this->rotate){
+        for(unsigned int i = 0; i < this->vectors.size(); i++){
+            this->vectors[i].RotateAround(this->rotationAxis, 2.5f);
+        }
+        this->update();
+    }
     glColor3ub(255, 107, 107);
     //draw vectors
     for(unsigned int i = 0; i < this->vectors.size(); i++){
