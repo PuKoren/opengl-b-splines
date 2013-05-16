@@ -1,5 +1,7 @@
 #ifndef _VECTOR2_H
 #define _VECTOR2_H
+#include <cmath>
+#define V_PI  3.14159265358979323846
 
 class Vector2{
 	public:
@@ -16,9 +18,10 @@ class Vector2{
 		float Y;
 		float Z;
 
-		int Distance(Vector2 *);
+		int Distance(Vector2);
 		float Length();
 		Vector2 Normalize();
+		void RotateAround(Vector2, float);
 		Vector2 operator- (Vector2);
 		Vector2 operator+ (Vector2);
 		Vector2 operator+= (Vector2);

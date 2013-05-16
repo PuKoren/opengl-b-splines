@@ -1,5 +1,4 @@
 #include "Vector2.h"
-#include <cmath>
 
 Vector2::Vector2(Vector2 *v){
 	this->X = v->X;
@@ -43,13 +42,12 @@ Vector2::Vector2(float x, float y, float z){
 	this->Z = z;
 }
 
-
 /*
 * Compute the Euclidian distance between two Vector2->
 * Distance is sqrt((v1->X - v2->X)² + (v1->Y - v2->Y)²)
 */
-int Vector2::Distance(Vector2 *v){
-	return (int)sqrt((float)(this->X - v->X)*(this->X - v->X) + (this->Y - v->Y) * (this->Y - v->Y));
+int Vector2::Distance(Vector2 v){
+	return (int)sqrt((float)(this->X - v.X)*(this->X - v.X) + (this->Y - v.Y) * (this->Y - v.Y));
 }
 
 /*
@@ -66,6 +64,16 @@ float Vector2::Length(){
 */
 Vector2 Vector2::Normalize(){
 	return Vector2(this->X/this->Length(), this->Y/this->Length());
+}
+
+void Vector2::RotateAround(Vector2 center, float angle){ 
+	angle = angle * V_PI / 180;
+	float x = this->X - center.X;
+	float y = this->Y - center.Y;
+	float cs = cos(angle);
+	float sn = sin(angle);
+	this->X = (x * cs - y * sn) + center.X;
+	this->Y = (x * sn + y * cs) + center.Y;
 }
 
 Vector2 Vector2::operator-(Vector2 v){

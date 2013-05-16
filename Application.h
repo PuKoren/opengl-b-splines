@@ -14,6 +14,8 @@ private:
 	Spline spline;
 	int selected;
 	int degree;
+	bool rotate;
+	Vector2 latestMousePosition;
 public:
 	Application();
 	~Application();

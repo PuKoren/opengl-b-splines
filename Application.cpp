@@ -1,8 +1,10 @@
 #include "Application.h"
+//#include <iostream>
 
 Application::Application(){
     this->selected = -1;
-    this->degree = 4;
+    this->degree = 3;
+    this->rotate = false;
 }
 
 Application::~Application(){
@@ -27,7 +29,7 @@ void Application::keyboard(unsigned char key){
             }
             break;
         case '\x72':
-            this->vectors[0].Z -= 1.f;
+            this->rotate = true;
             this->update();
             break;
     }
@@ -59,6 +61,12 @@ void Application::keyboardSpecial(int key){
 }
 
 void Application::update(){
+    if(this->rotate){
+        for(unsigned int i = 0; i < this->vectors.size(); i++){
+            this->vectors[i].RotateAround(this->latestMousePosition, 2.5f);
+        }
+        this->rotate = false;
+    }
     this->spline.update(this->degree, this->vectors.size(), &this->vectors[0]);
     glutPostRedisplay();
 }
@@ -69,6 +77,7 @@ void Application::mouse(int button, int state, int x, int y){
         for(unsigned int i = 0; i < this->vectors.size(); i++){
             if(clickedVector.Distance(&this->vectors[i]) < 10.0f){
                 this->selected = i;
+                glutPostRedisplay();
             }
         }
 
@@ -91,6 +100,7 @@ void Application::mouse(int button, int state, int x, int y){
 
     if(state == GLUT_UP){
         selected = -1;
+        glutPostRedisplay();
     }
 }
 
@@ -103,15 +113,24 @@ void Application::mouseMotion(int x, int y){
 }
 
 void Application::draw(){
-    glColor3f(0.0f, 0.5f, 0.5f);
+    glColor3ub(255, 107, 107);
     //draw vectors
     for(unsigned int i = 0; i < this->vectors.size(); i++){
+        //highlight current selected control point
+        if(i == this->selected){
+            glColor3ub(199, 244, 100);
+        }
         glBegin(GL_QUADS);
         glVertex2f(this->vectors[i].X - 5, this->vectors[i].Y - 5);
         glVertex2f(this->vectors[i].X + 5, this->vectors[i].Y - 5);
         glVertex2f(this->vectors[i].X + 5, this->vectors[i].Y + 5);
         glVertex2f(this->vectors[i].X - 5, this->vectors[i].Y + 5);
         glEnd();
+
+        //put back old color
+        if(i == this->selected){
+            glColor3ub(255, 107, 107);
+        }
     }
 
     //draw lines between vectors
@@ -124,7 +143,7 @@ void Application::draw(){
         }
     }
 
-    glColor3f(0.5f, 0.0f, 0.5f);
+    glColor3ub(199, 244, 100);
     //draw spline
     this->spline.draw();
 }
