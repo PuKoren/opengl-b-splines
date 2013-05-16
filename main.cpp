@@ -59,19 +59,20 @@ void displayText(float x, float y, int r, int g, int b, const char *string) {
     glColor3ub(r, g, b);
     glRasterPos2f(x, window_height - y - 13);
     for( int i = 0; i < j; i++ ) {
-        glutBitmapCharacter( GLUT_BITMAP_8_BY_13, string[i] );
+        glutBitmapCharacter( GLUT_BITMAP_HELVETICA_12, string[i] );
     }
 }
 
 void display(){
+    glClearColor(0.05f, 0.05f, 0.05f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT);
     a.draw();
     displayText(0, 0, 78, 205, 196, "Welcome to the B-Spline drawer !");
-    displayText(0, 10, 78, 205, 196, "Use left mouse button to place control points and move them");
-    displayText(0, 20, 78, 205, 196, "Use right mouse button to delete a control point");
-    displayText(0, 30, 78, 205, 196, "Use + and - keys to change Spline Degree");
-    displayText(0, 40, 78, 205, 196, "Use arrows to move every control points");
-    displayText(0, 50, 78, 205, 196, "Use R key to rotate around your current mouse position (R to start, R to stop)");
+    displayText(0, 12, 200, 200, 200, "Use left mouse button to place control points and move them");
+    displayText(0, 24, 200, 200, 200, "Use right mouse button to delete a control point");
+    displayText(0, 36, 200, 200, 200, "Use + and - keys to change Spline Degree");
+    displayText(0, 48, 200, 200, 200, "Use arrows to move every control points");
+    displayText(0, 60, 200, 200, 200, "Use R key to rotate around your current mouse position (R to start, R to stop)");
 
     char notice[50];
     sprintf(notice, "Current degree: %d", a.getDegree());

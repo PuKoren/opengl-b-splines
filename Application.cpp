@@ -5,6 +5,7 @@ Application::Application(){
     this->selected = -1;
     this->degree = 3;
     this->rotate = false;
+    this->drawLines = true;
 }
 
 Application::~Application(){
@@ -32,6 +33,10 @@ void Application::keyboard(unsigned char key){
             this->rotate = !this->rotate;
             this->rotationAxis = this->latestMousePosition;
             this->update();
+            break;
+        case 32:
+            this->drawLines = !this->drawLines;
+            glutPostRedisplay();
             break;
     }
 }
@@ -77,6 +82,7 @@ void Application::mouse(int button, int state, int x, int y){
 
         if(selected < 0){
             this->vectors.push_back(this->latestMousePosition);
+            this->selected = this->vectors.size()-1;
             if(this->vectors.size() > 1){
                 this->update();
             }
@@ -135,7 +141,7 @@ void Application::draw(){
     }
 
     //draw lines between vectors
-    if(this->vectors.size() > 0){
+    if(this->drawLines && this->vectors.size() > 0){
         for(unsigned int i = 0; i < this->vectors.size() -1; i++){
             glBegin(GL_LINES);
             glVertex2f(this->vectors[i].X, this->vectors[i].Y);
