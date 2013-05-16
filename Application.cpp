@@ -39,6 +39,12 @@ void Application::keyboard(unsigned char key){
             this->drawLines = !this->drawLines;
             glutPostRedisplay();
             break;
+        case 26:
+            if(this->vectors.size() > 0){
+                this->vectors.erase(this->vectors.begin() + this->vectors.size());
+                this->update();
+            }
+            break;
         case 127:
             this->vectors.clear();
             this->rotate = false;
