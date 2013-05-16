@@ -70,11 +70,12 @@ void display(){
     displayText(0, 0, 78, 205, 196, "Welcome to the B-Spline drawer !");
     displayText(0, 12, 200, 200, 200, "Left mouse button: place control points and move them");
     displayText(0, 24, 200, 200, 200, "Right mouse button: delete a control point");
-    displayText(0, 36, 200, 200, 200, "+/-: to change Spline Degree");
-    displayText(0, 48, 200, 200, 200, "Arrows: to move every control points");
-    displayText(0, 60, 200, 200, 200, "R: rotate or stop rotate around your current mouse position");
-    displayText(0, 72, 200, 200, 200, "Space: show/hide lines between control points");
-    displayText(0, 84, 200, 200, 200, "Suppr: reset the viewport");
+    displayText(0, 36, 200, 200, 200, "Middle mouse button: move all control points");
+    displayText(0, 48, 200, 200, 200, "+/-: to change Spline Degree");
+    displayText(0, 60, 200, 200, 200, "Arrows: to move every control points");
+    displayText(0, 72, 200, 200, 200, "R: rotate or stop rotate around your current mouse position");
+    displayText(0, 84, 200, 200, 200, "Space: show/hide lines between control points");
+    displayText(0, 96, 200, 200, 200, "Suppr: reset the viewport");
 
     char notice[50];
     sprintf(notice, "Current degree: %d", a.getDegree());

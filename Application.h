@@ -16,6 +16,7 @@ private:
 	int degree;
 	bool rotate;
 	bool drawLines;
+	bool move;
 	Vector2 latestMousePosition;
 	Vector2 rotationAxis;
 public:

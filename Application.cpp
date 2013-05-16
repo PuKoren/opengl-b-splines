@@ -5,6 +5,7 @@ Application::Application(){
     this->selected = -1;
     this->degree = 3;
     this->rotate = false;
+    this->move = false;
     this->drawLines = true;
 }
 
@@ -100,10 +101,15 @@ void Application::mouse(int button, int state, int x, int y){
                 break;
             }
         }
+    }else if(this->selected < 0 && state == GLUT_DOWN && button == GLUT_MIDDLE_BUTTON){
+        this->move = true;
     }
 
     if(state == GLUT_UP){
-        selected = -1;
+        if(button == GLUT_MIDDLE_BUTTON){
+            this->move = false;
+        }
+        this->selected = -1;
         glutPostRedisplay();
     }
 }
@@ -112,6 +118,13 @@ void Application::mouseMotion(int x, int y){
     if(this->selected > -1){
         Vector2 clickedVector = Vector2(x, window_height - y);
         this->vectors[this->selected] = clickedVector;
+        this->update();
+    }
+    if(this->move){
+        for(unsigned int i = 0; i < this->vectors.size(); i++){
+            this->vectors[i].X += x - this->latestMousePosition.X;
+            this->vectors[i].Y += (window_height - y) - this->latestMousePosition.Y;
+        }
         this->update();
     }
     this->latestMousePosition.X = x;
