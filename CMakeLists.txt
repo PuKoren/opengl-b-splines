@@ -27,4 +27,4 @@ add_executable (BSplines maths/Vector2.cpp maths/Spline.cpp Application.cpp main
 ########################################################
 # Linking & stuff
 #########################################################
-target_link_libraries (BSplines ${OPENGL_LIBRARIES} -lfreeglut)
+target_link_libraries (BSplines ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <GL/freeglut.h>
 #include "Application.h"
 #include "config.h"
